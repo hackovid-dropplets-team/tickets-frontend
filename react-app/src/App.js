@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+
+import AuthApiService from './api-services/auth.js';
+
+import AppRouter from './routes';
+
 import './App.scss';
 
-function App() {
+
+const App = () => {
+  const [loggedIn, setLoggedIn] = useState(undefined);
+
+  // componentDidMount
+  useEffect(() => {
+    AuthApiService.getAuth()
+    .then(
+      (result) => {
+        setLoggedIn(true);
+      },
+      (error) => {
+        setLoggedIn(false);
+      }
+    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  console.log('loggedIn ' + loggedIn);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppRouter loggedIn={loggedIn}></AppRouter>
     </div>
   );
 }
