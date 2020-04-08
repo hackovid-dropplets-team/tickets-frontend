@@ -1,0 +1,50 @@
+.register-form {
+
+  h1 {
+    color: white;
+  }
+
+  .form-card {
+    width: 300px;
+    margin: auto;
+
+    fieldset {
+      width: 100%;
+    }
+
+    .actions-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .buttons-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+
+        .register-button:not(:disabled) {
+          background-color: #4285CA;
+          color: white;
+        }
+      }
+
+      .register-loader {
+        position: absolute;
+        top: 14px;
+        margin: 0;
+      }
+
+      .register-error-message {
+        color: red;
+        font-size: 0.8em;
+        margin-top: 10px;
+      }
+    }
+
+    .register-password-icon.visible {
+      color: #4285CA;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import AuthApiService from '../../api-services/auth.js';
+import AuthApiService from '../../../api-services/auth.js';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import IconButton from '@material-ui/core/IconButton';
@@ -18,7 +18,7 @@ import Button from '@material-ui/core/Button';
 import './Login.scss';
 
 
-const LoginPage = () => {
+const LoginForm = (props) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -45,10 +45,9 @@ const LoginPage = () => {
     );
   }
 
-  //if success redirect to home /
   return (
-    <div className="login-page">
-      <h1>DROPPLETS</h1>
+    <div className="login-form">
+      <h1>INICI DE SESSIÓ</h1>
 
       <form onSubmit={handleSubmit}>
         <Card className="form-card">
@@ -86,17 +85,22 @@ const LoginPage = () => {
             </FormControl>
           </CardContent>
 
-          <CardActions className="login-button-container">
-            <Button
-              type="submit"
-              variant="contained"
-              className={"login-button" + (success===false ? " error" : "")}
-              disabled={submitting}
-              >
-              Entrar
-            </Button>
+          <CardActions className="actions-container">
             {submitting && <CircularProgress size={24} className="login-loader" />}
             {success===false && <p className="login-error-message">Credencials incorrectes</p> }
+
+            <div className="buttons-container">
+              <Button color="primary" onClick={() => props.setToggleForm(true)}>Creeu un compte</Button>
+
+              <Button
+                type="submit"
+                variant="contained"
+                className={"login-button" + (success===false ? " error" : "")}
+                disabled={submitting}
+                >
+                Entreu
+              </Button>
+            </div>
           </CardActions>
 
         </Card>
@@ -105,4 +109,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default LoginForm;

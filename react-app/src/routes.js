@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import { LoginPage } from './pages/login';
+import { AuthPage } from './pages/auth';
 import { TicketsPage } from './pages/tickets';
 
 
@@ -14,19 +14,19 @@ const AppRouter = (props) => {
   const loggedIn = props.loggedIn;
 
   const [urlIsLogin, setUrlIsLogin] = useState(
-    window.location.pathname.substring(0, 11) === "/auth/login"
+    window.location.pathname.substring(0, 11) === "/auth"
   );
 
   useEffect(() => {
     setUrlIsLogin(
-      window.location.pathname.substring(0, 11) === "/auth/login"
+      window.location.pathname.substring(0, 11) === "/auth"
     )
   }, [loggedIn]);
 
   const routes = (
     <React.Fragment>
       <Route exact path="/" component={TicketsPage} />
-      <Route exact path="/auth/login/" component={LoginPage} />
+      <Route exact path="/auth/" component={AuthPage} />
     </React.Fragment>
   );
 
@@ -38,7 +38,7 @@ const AppRouter = (props) => {
     )
   } else if (loggedIn === false && !urlIsLogin) {
     content = (
-      <Redirect to="/auth/login"/>
+      <Redirect to="/auth"/>
     );
   } else if (loggedIn === undefined) {
     content = (
