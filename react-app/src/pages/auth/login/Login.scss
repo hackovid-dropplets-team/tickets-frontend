@@ -2,6 +2,14 @@
 
   h1 {
     color: white;
+    text-align: left;
+    margin-bottom: 0px;
+  }
+
+  .p-title {
+    color: white;
+    text-align: left;
+    margin-top: 0px;
   }
 
   .form-card {
@@ -35,16 +43,29 @@
         top: 14px;
         margin: 0;
       }
-
-      .login-error-message {
-        color: red;
-        font-size: 0.8em;
-        margin-top: 10px;
-      }
     }
 
     .login-password-icon.visible {
       color: #4285CA;
     }
+  }
+
+  .login-error-message {
+    color: #f44336;
+    font-size: 0.8em;
+    margin-top: 10px;
+  }
+
+  .p-register {
+    color: white;
+    text-align: center;
+    margin-bottom: 0px;
+    font-size: 0.8em;
+  }
+
+  .register-button:not(:disabled) {
+    color: white;
+    text-transform: unset;
+    font-weight: bold;
   }
 }

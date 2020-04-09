@@ -15,6 +15,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Alert from '@material-ui/lab/Alert';
 
 import './Register.scss';
 
@@ -22,6 +23,7 @@ import './Register.scss';
 const RegisterForm = (props) => {
 
   const [username, setUsername] = useState('');
+  const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -63,21 +65,21 @@ const RegisterForm = (props) => {
 
   return (
     <div className="register-form">
-      <h1>NOU REGISTRE</h1>
+      <h1>Registre</h1>
 
       <form onSubmit={handleSubmit}>
         <Card className="form-card">
 
           <CardContent>
-            <Typography variant="subtitle1" gutterBottom>
+            {/* <Typography variant="subtitle1" gutterBottom>
               Trieu un nom d'usuari i una contrasenya a continuació.
             </Typography>
             <Typography variant="caption" display="block" gutterBottom>
               La contrasenya ha de contenir un mínim de 8 caràcters amb majúscules, minúscules i números.
-            </Typography>
+            </Typography> */}
 
             <FormControl component="fieldset">
-              <InputLabel htmlFor="input-with-icon-adornment">Nom d'usuari</InputLabel>
+              <InputLabel htmlFor="input-with-icon-adornment">Usuari *</InputLabel>
               <Input
                 id="input-with-icon-adornment"
                 value={username}
@@ -87,7 +89,16 @@ const RegisterForm = (props) => {
             </FormControl>
 
             <FormControl component="fieldset">
-              <InputLabel htmlFor="adornment-password">Contrasenya</InputLabel>
+              <InputLabel htmlFor="input-with-icon-adornment">Correu</InputLabel>
+              <Input
+                id="input-with-icon-adornment"
+                value={mail}
+                onChange={event => setMail(event.target.value)}
+                />
+            </FormControl>
+
+            <FormControl component="fieldset">
+              <InputLabel htmlFor="adornment-password">Contrasenya *</InputLabel>
               <Input
                 id="adornment-password"
                 type={showPassword ? 'text' : 'password'}
@@ -108,7 +119,7 @@ const RegisterForm = (props) => {
             </FormControl>
 
             <FormControl component="fieldset">
-              <InputLabel htmlFor="adornment-password-repeat">Repetiu la contrasenya</InputLabel>
+              <InputLabel htmlFor="adornment-password-repeat">Repetiu la contrasenya *</InputLabel>
               <Input
                 id="adornment-password-repeat"
                 type={showPasswordRepeat ? 'text' : 'password'}
@@ -131,11 +142,9 @@ const RegisterForm = (props) => {
 
           <CardActions className="actions-container">
             {submitting && <CircularProgress size={24} className="register-loader" />}
-            {success===false && <p className="register-error-message">{errorMessage}</p> }
+            {/*{success===false && <p className="register-error-message">{errorMessage}</p> }*/}
 
             <div className="buttons-container">
-              <Button color="primary" onClick={() => props.setToggleForm(false)}>Torneu a l'inici</Button>
-
               <Button
                 type="submit"
                 variant="contained"
@@ -146,8 +155,9 @@ const RegisterForm = (props) => {
               </Button>
             </div>
           </CardActions>
-
         </Card>
+        {success===false && <Alert severity="error" className="register-error-message">{errorMessage}</Alert>}
+        <Button className={"back-button"} color="primary" onClick={() => props.setToggleForm(false)}>Torneu a l'inici</Button>
       </form>
     </div>
   );

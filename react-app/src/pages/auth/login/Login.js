@@ -14,6 +14,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import Alert from '@material-ui/lab/Alert';
 
 import './Login.scss';
 
@@ -21,6 +22,7 @@ import './Login.scss';
 const LoginForm = (props) => {
 
   const [username, setUsername] = useState('');
+  const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -47,14 +49,15 @@ const LoginForm = (props) => {
 
   return (
     <div className="login-form">
-      <h1>INICI DE SESSIÓ</h1>
+      <h1>Benvingut</h1>
+      <p className="p-title">Inicia sessió</p>
 
       <form onSubmit={handleSubmit}>
         <Card className="form-card">
 
           <CardContent>
             <FormControl component="fieldset">
-              <InputLabel htmlFor="input-with-icon-adornment">Nom d'usuari</InputLabel>
+              <InputLabel htmlFor="input-with-icon-adornment">Usuari *</InputLabel>
               <Input
                 id="input-with-icon-adornment"
                 value={username}
@@ -64,7 +67,16 @@ const LoginForm = (props) => {
             </FormControl>
 
             <FormControl component="fieldset">
-              <InputLabel htmlFor="adornment-password">Contrasenya</InputLabel>
+              <InputLabel htmlFor="input-with-icon-adornment">Correu</InputLabel>
+              <Input
+                id="input-with-icon-adornment"
+                value={mail}
+                onChange={event => setMail(event.target.value)}
+                />
+            </FormControl>
+
+            <FormControl component="fieldset">
+              <InputLabel htmlFor="adornment-password">Contrasenya *</InputLabel>
               <Input
                 id="adornment-password"
                 type={showPassword ? 'text' : 'password'}
@@ -87,11 +99,8 @@ const LoginForm = (props) => {
 
           <CardActions className="actions-container">
             {submitting && <CircularProgress size={24} className="login-loader" />}
-            {success===false && <p className="login-error-message">Credencials incorrectes</p> }
 
             <div className="buttons-container">
-              <Button color="primary" onClick={() => props.setToggleForm(true)}>Creeu un compte</Button>
-
               <Button
                 type="submit"
                 variant="contained"
@@ -102,8 +111,10 @@ const LoginForm = (props) => {
               </Button>
             </div>
           </CardActions>
-
         </Card>
+        {success===false && <Alert severity="error" className="login-error-message">Credencials incorrectes</Alert>}
+        <p className="p-register">No teniu compte?</p>
+        <Button className={"register-button" + (success===false ? " error" : "")} color="primary" onClick={() => props.setToggleForm(true)}>Creeu-lo</Button>
       </form>
     </div>
   );
