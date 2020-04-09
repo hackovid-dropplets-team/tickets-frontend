@@ -16,6 +16,12 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
+import InfoIcon from '@material-ui/icons/Info';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import './Register.scss';
 
@@ -31,6 +37,15 @@ const RegisterForm = (props) => {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(undefined);
   const [errorMessage, setErrorMessage] = useState('');
+  const [infoOpen, setInfoOpen] = useState(false);
+
+  const handleInfoOpen = () => {
+    setInfoOpen(true);
+  }
+
+  const handleInfoClose = () => {
+    setInfoOpen(false);
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -71,13 +86,6 @@ const RegisterForm = (props) => {
         <Card className="form-card">
 
           <CardContent>
-            {/* <Typography variant="subtitle1" gutterBottom>
-              Trieu un nom d'usuari i una contrasenya a continuació.
-            </Typography>
-            <Typography variant="caption" display="block" gutterBottom>
-              La contrasenya ha de contenir un mínim de 8 caràcters amb majúscules, minúscules i números.
-            </Typography> */}
-
             <FormControl component="fieldset">
               <InputLabel htmlFor="input-with-icon-adornment">Usuari *</InputLabel>
               <Input
@@ -142,7 +150,6 @@ const RegisterForm = (props) => {
 
           <CardActions className="actions-container">
             {submitting && <CircularProgress size={24} className="register-loader" />}
-            {/*{success===false && <p className="register-error-message">{errorMessage}</p> }*/}
 
             <div className="buttons-container">
               <Button
@@ -153,6 +160,30 @@ const RegisterForm = (props) => {
                 >
                 Envieu
               </Button>
+              <IconButton
+                aria-label="Toggle password visibility" onClick={handleInfoOpen}>
+                  <InfoIcon></InfoIcon>
+              </IconButton>
+              <Dialog
+                open={infoOpen}
+                onClose={handleInfoClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">
+                  {"Informació de la contrasenya"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                  La contrasenya ha de contenir un mínim de 8 caràcters amb majúscules, minúscules i números.
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleInfoClose} color="primary">
+                    D'acord
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </div>
           </CardActions>
         </Card>
