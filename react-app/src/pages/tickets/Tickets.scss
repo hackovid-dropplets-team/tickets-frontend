@@ -1,5 +1,11 @@
 .tickets-page {
 
+  .floating-new-button {
+    width: 100%;
+    position: fixed;
+    bottom: 30px;
+  }
+
   .tickets-list {
     display: flex;
     align-items: center;
