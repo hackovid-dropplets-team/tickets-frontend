@@ -1,3 +1,13 @@
 .tickets-page {
-  
+
+  .tickets-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .ticket-card {
+      margin: 10px;
+    }
+  }
 }
