@@ -34,7 +34,7 @@ const TicketsPage = () => {
       <AppMenu />
       <FloatingNewButton />
 
-      <TicketsList tickets={tickets}/>
+      <TicketsList tickets={tickets} />
     </div>
   );
 };

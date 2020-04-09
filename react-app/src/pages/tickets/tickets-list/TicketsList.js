@@ -16,13 +16,13 @@ const TicketsList = (props) => {
       {tickets && tickets.map((ticket, i) => (
         <Card className="ticket-card">
           <CardContent>
-            <Typography className="ticket-description" variant="h5" component="h2">
-              {ticket.description}
-            </Typography>
-            <Typography className="ticket-title" color="textSecondary" gutterBottom>
+            <Typography className="ticket-title" variant="h5" component="h2">
               {ticket.title}
             </Typography>
-            <Typography className="ticket-description" variant="body2" component="p">
+            <Typography className="ticket-description" color="textSecondary" gutterBottom>
+              {ticket.description}
+            </Typography>
+            <Typography className="ticket-username" variant="body2" component="p">
               {"Usuari " + ticket.user_id}
             </Typography>
           </CardContent>
