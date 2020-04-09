@@ -2,6 +2,7 @@
 
   h1 {
     color: white;
+    text-align: left;
   }
 
   .form-card {
@@ -36,15 +37,22 @@
         margin: 0;
       }
 
-      .register-error-message {
-        color: red;
-        font-size: 0.8em;
-        margin-top: 10px;
-      }
     }
 
     .register-password-icon.visible {
       color: #4285CA;
     }
+  }
+
+  .register-error-message {
+    color: #f44336;
+    font-size: 0.8em;
+    margin-top: 10px;
+  }
+
+  .back-button:not(:disabled) {
+    color: white;
+    text-transform: unset;
+    font-weight: bold;
   }
 }
