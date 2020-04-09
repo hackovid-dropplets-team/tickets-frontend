@@ -9,7 +9,7 @@ class AuthApiService  {
   }
 
   static postAuthLogin(username, password) {
-    return fetch(config.api.URL + "/auth/register", {
+    return fetch(config.api.URL + "/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
