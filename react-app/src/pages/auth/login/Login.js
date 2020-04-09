@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { Redirect } from 'react-router';
+
 import AuthApiService from '../../../api-services/auth.js';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -28,7 +30,6 @@ const LoginForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    //console.log('passo per aquí');
     setSubmitting(true);
 
     AuthApiService.postAuthLogin(username, password)
@@ -45,7 +46,9 @@ const LoginForm = (props) => {
     );
   }
 
-  return (
+  return success ? (
+    <Redirect to="/" />
+  ) : (
     <div className="login-form">
       <h1>INICI DE SESSIÓ</h1>
 
