@@ -24,8 +24,6 @@ const App = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log('loggedIn ' + loggedIn);
-
   return (
     <div className="App">
       <AppRouter loggedIn={loggedIn}></AppRouter>
