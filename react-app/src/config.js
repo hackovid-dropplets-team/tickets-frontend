@@ -1,6 +1,6 @@
 const dev = {
   api: {
-    URL: "http://localhost:8000"
+    URL: "http://tickets.lesquerra.cat"
   }
 };
 
