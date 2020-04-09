@@ -7,6 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { AuthPage } from './pages/auth';
 import { TicketsPage } from './pages/tickets';
+import { NewTicketPage } from './pages/new-ticket';
 
 
 const AppRouter = (props) => {
@@ -27,6 +28,7 @@ const AppRouter = (props) => {
     <React.Fragment>
       <Route exact path="/" component={TicketsPage} />
       <Route exact path="/auth/" component={AuthPage} />
+      <Route exact path="/publicar" component={NewTicketPage} />
     </React.Fragment>
   );
 
