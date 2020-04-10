@@ -8,7 +8,7 @@ class AuthApiService  {
     .then(res => res.json())
   }
 
-  static postAuthLogin(username, password) {
+  static postAuthLogin(username,email, password) {
     return fetch(config.api.URL + "/auth/login", {
       method: "POST",
       headers: {
@@ -17,7 +17,8 @@ class AuthApiService  {
       credentials: "include",
       body: JSON.stringify({
         "username": username,
-        "password": password
+        "password": password,
+        'email': email,
       }),
     })
     .then(res => res.json())

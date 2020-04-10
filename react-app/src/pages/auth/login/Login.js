@@ -34,7 +34,7 @@ const LoginForm = (props) => {
     event.preventDefault();
     setSubmitting(true);
 
-    AuthApiService.postAuthLogin(username, password)
+    AuthApiService.postAuthLogin(username, mail, password)
     .then(
       (result) => {
         // redirect
