@@ -8,6 +8,13 @@ class TicketsApiService {
     .then(res => res.json())
   }
 
+  static getTicket(id) {
+    return fetch(config.api.URL + "/tickets/" + id, {
+      credentials: "include",
+    })
+    .then(res => res.json())
+  }
+
   static postTickets(obj) {
     return fetch(config.api.URL + "/tickets", {
       method: "POST",
