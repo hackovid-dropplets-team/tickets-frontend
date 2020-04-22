@@ -65,6 +65,7 @@ const RegisterForm = (props) => {
         .then(
           (result) => {
             // redirect
+            window.location.reload();
             setSuccess(true);
             setSubmitting(false);
           },
@@ -81,9 +82,7 @@ const RegisterForm = (props) => {
     }
   }
 
-  return success ? (
-      <Redirect to="/auth" />
-  ) : (
+  return (
     <div className="register-form">
       <h1>Registre</h1>
 
