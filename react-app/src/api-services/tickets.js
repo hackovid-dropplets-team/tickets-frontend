@@ -1,9 +1,20 @@
 import config from '../config.js';
 
 class TicketsApiService {
-  static getTickets() {
+  static getNearTickets() {
     let authToken = sessionStorage.getItem('AuthToken')
     return fetch(config.api.URL + "/tickets", {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer "+authToken,
+      }
+    })
+    .then(res => res.json())
+  }
+
+  static getMyTickets() {
+    let authToken = sessionStorage.getItem('AuthToken')
+    return fetch(config.api.URL + "/tickets/mine", {
       method: "GET",
       headers: {
         "Authorization": "Bearer "+authToken,
@@ -23,16 +34,26 @@ class TicketsApiService {
     .then(res => res.json())
   }
 
-  static postTickets(obj) {
+  static postNewTicket(title, description) {
+    let authToken = sessionStorage.getItem('AuthToken')
+    console.log(authToken);
+    let formData = new FormData();
+
+    formData.append('title', title);
+    formData.append('description', description);
+
     return fetch(config.api.URL + "/tickets", {
       method: "POST",
+      body: formData,
       headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(obj),
+        "Authorization": "Bearer "+authToken,
+      }
     })
-    .then(res => res.json())
+    .then(res => {
+      const statusCode = res.status;
+      const data = res.json();
+      return Promise.all([statusCode, data]);
+    })
   }
 
   static deleteTickets(id) {

@@ -8,7 +8,6 @@ import TicketsList from './tickets-list/TicketsList.js';
 
 import './Tickets.scss';
 
-
 const TicketsPage = () => {
 
   const [tickets, setTickets] = useState([]);
@@ -16,7 +15,7 @@ const TicketsPage = () => {
 
   // componentDidMount
   useEffect(() => {
-    TicketsApiService.getTickets()
+    TicketsApiService.getNearTickets()
     .then(
       (result) => {
         setTickets(result);
@@ -31,7 +30,7 @@ const TicketsPage = () => {
     <div className="tickets-page">
       <AppMenu />
       <FloatingNewButton />
-
+      <h1>Tickets que tens a prop:</h1>
       <TicketsList tickets={tickets} />
     </div>
   );

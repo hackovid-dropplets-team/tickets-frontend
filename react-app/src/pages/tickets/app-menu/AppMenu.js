@@ -17,6 +17,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ChatIcon from '@material-ui/icons/Chat';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -62,7 +63,15 @@ const AppMenu = () => {
         </ListItem>
         <ListItem button>
           <ListItemIcon><ListAltIcon /></ListItemIcon>
-          <ListItemText primary="Les meves necessitats" />
+          <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <ListItemText primary="Necessitats pròximes" />
+          </Link>
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon><ListAltIcon /></ListItemIcon>
+          <Link to="/myTickets" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <ListItemText primary="Les meves necessitats" />
+          </Link>
         </ListItem>
       </List>
       <Divider />
