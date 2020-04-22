@@ -8,20 +8,21 @@ class AuthApiService  {
     .then(res => res.json())
   }
 
-  static postAuthLogin(username,email, password) {
-    return fetch(config.api.URL + "/auth/login", {
+  static postAuthLogin(email, password) {
+    let formData = new FormData();
+
+    formData.append('email', email);
+    formData.append('password', password);
+
+    return fetch(config.api.URL + "/login", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        "username": username,
-        "password": password,
-        'email': email,
-      }),
+      body: formData
     })
-    .then(res => res.json())
+    .then(res => {
+      const statusCode = res.status;
+      const data = res.json();
+      return Promise.all([statusCode, data]);
+    })
   }
 
   static postAuthRegister(username, password) {

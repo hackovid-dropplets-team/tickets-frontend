@@ -7,7 +7,7 @@ import ReturnBar from '../../shared/return-bar/ReturnBar.js';
 
 const DetailTicketPage = (props) => {
 
-  const [ticketId, ] = useState(parseInt(props.match.params.id));
+  const [ticketId, ] = useState(props.match.params.id);
   const [ticketData, setTicketData] = useState();
   const [error, setError] = useState(undefined);
 
@@ -15,8 +15,7 @@ const DetailTicketPage = (props) => {
     TicketsApiService.getTicket(ticketId)
     .then(
       (result) => {
-        console.log(result.data);
-        setTicketData(result.data);
+        setTicketData(result);
       },
       (error) => {
         setError(true);
@@ -27,8 +26,11 @@ const DetailTicketPage = (props) => {
   return (
     <div className="new-ticket-page">
       <ReturnBar title={"Detall publicació " + ticketId} />
-
-      <h2>DETALL {ticketData ? ticketData.title : ""}</h2>
+      <h2>{ticketData ? ticketData.title : ""}</h2>
+      <p>{ticketData ? ticketData.description : ""}</p>
+      <p><b>Latitud: </b>{ticketData ? ticketData.latitude : ""}</p>
+      <p><b>Longitud: </b>{ticketData ? ticketData.longitude : ""}</p>
+      <p><b>Email de contacte: </b>{ticketData ? ticketData.email_contact : ""}</p>
     </div>
   );
 };

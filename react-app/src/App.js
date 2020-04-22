@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import AuthApiService from './api-services/auth.js';
-
 import AppRouter from './routes';
 
 import './App.scss';
@@ -12,21 +10,16 @@ const App = () => {
 
   // componentDidMount
   useEffect(() => {
-    AuthApiService.getAuth()
-    .then(
-      (result) => {
-        setLoggedIn(true);
-      },
-      (error) => {
-        setLoggedIn(false);
-      }
-    );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (sessionStorage.getItem('AuthToken')) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
   }, []);
 
   return (
     <div className="App">
-      <AppRouter loggedIn={loggedIn}></AppRouter>
+      <AppRouter loggedIn={loggedIn}/>
     </div>
   );
 }

@@ -16,7 +16,7 @@ const TicketsList = (props) => {
   return (
     <div className="tickets-list">
       {tickets && tickets.map((ticket, i) => (
-        <Link to={"/detall/" + ticket.id} style={{ color: 'inherit', textDecoration: 'none' }}>
+        <Link key={ticket.id} to={"/detall/" + ticket.id} style={{ color: 'inherit', textDecoration: 'none' }}>
           <Card className="ticket-card">
             <CardContent>
               <Typography className="ticket-title" variant="h5" component="h2">
@@ -24,9 +24,6 @@ const TicketsList = (props) => {
               </Typography>
               <Typography className="ticket-description" color="textSecondary" gutterBottom>
                 {ticket.description}
-              </Typography>
-              <Typography className="ticket-username" variant="body2" component="p">
-                {"Usuari " + ticket.user_id}
               </Typography>
             </CardContent>
             <CardActions>

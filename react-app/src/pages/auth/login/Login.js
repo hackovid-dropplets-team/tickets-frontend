@@ -34,12 +34,19 @@ const LoginForm = (props) => {
     event.preventDefault();
     setSubmitting(true);
 
-    AuthApiService.postAuthLogin(username, mail, password)
+    AuthApiService.postAuthLogin(mail, password)
     .then(
       (result) => {
-        // redirect
-        setSuccess(true);
-        setSubmitting(false);
+        if (result[0] === 200) {
+          // store the token
+          sessionStorage.setItem('AuthToken', result[1].token);
+          // redirect
+          setSuccess(true);
+          setSubmitting(false);
+        } else {
+          setSuccess(false);
+          setSubmitting(false);
+        }
       },
       (error) => {
         setSuccess(false);
@@ -59,22 +66,14 @@ const LoginForm = (props) => {
         <Card className="form-card">
 
           <CardContent>
-            <FormControl component="fieldset">
-              <InputLabel htmlFor="input-with-icon-adornment">Usuari *</InputLabel>
-              <Input
-                id="input-with-icon-adornment"
-                value={username}
-                onChange={event => setUsername(event.target.value)}
-                autoFocus
-                />
-            </FormControl>
 
             <FormControl component="fieldset">
-              <InputLabel htmlFor="input-with-icon-adornment">Correu</InputLabel>
+              <InputLabel htmlFor="input-with-icon-adornment">Correu *</InputLabel>
               <Input
                 id="input-with-icon-adornment"
                 value={mail}
                 onChange={event => setMail(event.target.value)}
+                autoFocus
                 />
             </FormControl>
 

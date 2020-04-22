@@ -2,15 +2,23 @@ import config from '../config.js';
 
 class TicketsApiService {
   static getTickets() {
+    let authToken = sessionStorage.getItem('AuthToken')
     return fetch(config.api.URL + "/tickets", {
-      credentials: "include",
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer "+authToken,
+      }
     })
     .then(res => res.json())
   }
 
   static getTicket(id) {
+    let authToken = sessionStorage.getItem('AuthToken')
     return fetch(config.api.URL + "/tickets/" + id, {
-      credentials: "include",
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer "+authToken,
+      }
     })
     .then(res => res.json())
   }

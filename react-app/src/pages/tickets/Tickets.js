@@ -19,14 +19,12 @@ const TicketsPage = () => {
     TicketsApiService.getTickets()
     .then(
       (result) => {
-        console.log(result.data);
-        setTickets(result.data);
+        setTickets(result);
       },
       (error) => {
         setError(true);
       }
     );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
