@@ -25,19 +25,25 @@ class AuthApiService  {
     })
   }
 
-  static postAuthRegister(username, password) {
-    return fetch(config.api.URL + "/auth/register", {
+  static postAuthRegister(username, mail, password, latitude, longitude, radiAccio) {
+    let formData = new FormData();
+
+    formData.append('name', username);
+    formData.append('email', mail);
+    formData.append('password', password);
+    formData.append('latitude', latitude);
+    formData.append('longitude', longitude);
+    formData.append('action_radius', radiAccio);
+
+    return fetch(config.api.URL + "/register", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        "username": username,
-        "password": password
-      }),
+      body: formData,
     })
-    .then(res => res.json())
+    .then(res => {
+      const statusCode = res.status;
+      const data = res.json();
+      return Promise.all([statusCode, data]);
+    })
   }
 
   static getAuthLogout() {

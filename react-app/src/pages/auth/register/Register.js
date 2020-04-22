@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import AuthApiService from '../../../api-services/auth.js';
+import {usePosition} from '../../../api-services/usePosition';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import IconButton from '@material-ui/core/IconButton';
@@ -24,12 +25,13 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import './Register.scss';
-
+import {Redirect} from "react-router";
 
 const RegisterForm = (props) => {
 
   const [username, setUsername] = useState('');
   const [mail, setMail] = useState('');
+  const [radiAccio, setRadiAccio] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -38,6 +40,8 @@ const RegisterForm = (props) => {
   const [success, setSuccess] = useState(undefined);
   const [errorMessage, setErrorMessage] = useState('');
   const [infoOpen, setInfoOpen] = useState(false);
+
+  const {latitude, longitude, error} = usePosition();
 
   const handleInfoOpen = () => {
     setInfoOpen(true);
@@ -57,8 +61,7 @@ const RegisterForm = (props) => {
     } else {
       if (strongRegex.test(password)) {
         setSubmitting(true);
-
-        AuthApiService.postAuthRegister(username, password)
+        AuthApiService.postAuthRegister(username, mail, password, latitude, longitude, radiAccio)
         .then(
           (result) => {
             // redirect
@@ -78,7 +81,9 @@ const RegisterForm = (props) => {
     }
   }
 
-  return (
+  return success ? (
+      <Redirect to="/auth" />
+  ) : (
     <div className="register-form">
       <h1>Registre</h1>
 
@@ -87,7 +92,7 @@ const RegisterForm = (props) => {
 
           <CardContent>
             <FormControl component="fieldset">
-              <InputLabel htmlFor="input-with-icon-adornment">Usuari *</InputLabel>
+              <InputLabel htmlFor="input-with-icon-adornment">Nom *</InputLabel>
               <Input
                 id="input-with-icon-adornment"
                 value={username}
@@ -103,6 +108,16 @@ const RegisterForm = (props) => {
                 value={mail}
                 onChange={event => setMail(event.target.value)}
                 />
+            </FormControl>
+
+            <FormControl component="fieldset">
+              <InputLabel htmlFor="input-with-icon-adornment">Radi d'acció</InputLabel>
+              <Input
+                  id="input-with-icon-adornment"
+                  type={'number'}
+                  value={radiAccio}
+                  onChange={event => setRadiAccio(event.target.value)}
+              />
             </FormControl>
 
             <FormControl component="fieldset">
